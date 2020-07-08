@@ -1,4 +1,5 @@
-const express = require('express')
+import express from 'express'
+
 const routes = express.Router()
 
 routes.post('/', (req, res) => {
@@ -8,8 +9,8 @@ routes.post('/', (req, res) => {
       {
         message: 'received'
       }
-    ] 
+    ]
   })
 })
 
-module.exports = routes
+export default routes

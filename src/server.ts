@@ -1,9 +1,9 @@
-const express = require('express')
-const helmet = require('helmet')
-const cors = require('cors')
-const morgan = require('morgan')
+import express from 'express'
+import helmet from 'helmet'
+import cors from 'cors'
+import morgan from 'morgan'
 
-const routes = require('./routes/routes.js')
+import routes from './routes/routes'
 
 const app = express()
 
