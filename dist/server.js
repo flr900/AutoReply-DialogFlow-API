@@ -12,7 +12,7 @@ var AppError_1 = __importDefault(require("./errors/AppError"));
 var routes_1 = __importDefault(require("./routes/routes"));
 require("express-async-errors");
 var app = express_1.default();
-app.use(morgan_1.default('tiny'));
+app.use(morgan_1.default('dev'));
 app.use(helmet_1.default());
 app.use(cors_1.default());
 app.use(express_1.default.json());
