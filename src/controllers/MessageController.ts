@@ -2,18 +2,16 @@ import {Request, Response} from 'express'
 
 interface IRequest {
   senderMessage: string,
-  senderNam: string
+  senderName: string
 }
 
 export default class MessageReceiverController {
   public receiveMessage (req: Request, res: Response){
-      const {senderMessage, senderNam}: IRequest = req.body
-
-      const request = req.body
+      const {senderMessage, senderName}: IRequest = req.body
 
       return res.json({ data:[
           {
-            message: request
+            message: `received ${senderMessage} from ${senderName}`
           }
         ]
       })
