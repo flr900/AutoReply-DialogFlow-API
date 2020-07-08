@@ -13,7 +13,7 @@ export default class MessageReceiverController {
 
       return res.json({ data:[
           {
-            message: request //`received ${senderMessage} from ${senderName}`
+            message: request
           }
         ]
       })
