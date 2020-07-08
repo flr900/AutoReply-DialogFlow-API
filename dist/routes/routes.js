@@ -1,8 +1,11 @@
 "use strict";
-var express = require('express');
-var routes = express.Router();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var routes = express_1.default.Router();
 routes.post('/', function (req, res) {
-    console.log(req);
     var data = req.body;
     return res.json({ data: [
             {
@@ -11,4 +14,4 @@ routes.post('/', function (req, res) {
         ]
     });
 });
-module.exports = routes;
+exports.default = routes;
