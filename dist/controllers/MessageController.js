@@ -5,10 +5,9 @@ var MessageReceiverController = /** @class */ (function () {
     }
     MessageReceiverController.prototype.receiveMessage = function (req, res) {
         var _a = req.body, senderMessage = _a.senderMessage, senderName = _a.senderName;
-        var request = req.body;
         return res.json({ data: [
                 {
-                    message: request
+                    message: "received " + senderMessage + " from " + senderName
                 }
             ]
         });
