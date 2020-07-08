@@ -4,7 +4,12 @@ const routes = express.Router()
 routes.post('/', (req, res) => {
   console.log(req)
   const data = req.body
-  return res.json({ message: 'received'})
+  return res.json({ data:[
+      {
+        message: 'received'
+      }
+    ] 
+  })
 })
 
 module.exports = routes
