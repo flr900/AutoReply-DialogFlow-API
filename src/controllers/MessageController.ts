@@ -9,9 +9,11 @@ export default class MessageReceiverController {
   public receiveMessage (req: Request, res: Response){
       const {senderMessage, senderName}: IRequest = req.body
 
+      const request = req.body
+
       return res.json({ data:[
           {
-            message: req.body //`received ${senderMessage} from ${senderName}`
+            message: request //`received ${senderMessage} from ${senderName}`
           }
         ]
       })
