@@ -1,16 +1,11 @@
 import express from 'express'
 import Auth from '../middlewares/auth'
 
-const routes = express.Router()
+import MessageController from '../controllers/MessageController'
 
-routes.post('/', Auth ,(req, res) => {
-  const data = req.body
-  return res.json({ data:[
-      {
-        message: 'received'
-      }
-    ]
-  })
-})
+const routes = express.Router()
+const messageController = new MessageController()
+
+routes.post('/', Auth , messageController.receiveMessage)
 
 export default routes
