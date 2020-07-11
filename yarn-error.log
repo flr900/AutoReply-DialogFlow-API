@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add dialogflow-fullfillment actions-on-google
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add @types/dialoflow -D
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/dialogflow-fullfillment: Not found
+  Error: https://registry.yarnpkg.com/@types%2fdialoflow: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:198:13)
@@ -46,6 +46,7 @@ npm manifest:
       "eslint-import-resolver-typescript": "^2.0.0",
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
+      "googleapis": "^52.1.0",
       "helmet": "^3.23.3",
       "morgan": "^1.10.0"
     },
@@ -1048,12 +1049,31 @@ Lockfile:
       is-stream "^2.0.0"
       node-fetch "^2.3.0"
   
+  gaxios@^3.0.0:
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/gaxios/-/gaxios-3.0.3.tgz#497730758f5b0d43a32ebdbebe5f1bd9f7db7aed"
+    integrity sha512-PkzQludeIFhd535/yucALT/Wxyj/y2zLyrMwPcJmnLHDugmV49NvAi/vb+VUq/eWztATZCNcb8ue+ywPG+oLuw==
+    dependencies:
+      abort-controller "^3.0.0"
+      extend "^3.0.2"
+      https-proxy-agent "^5.0.0"
+      is-stream "^2.0.0"
+      node-fetch "^2.3.0"
+  
   gcp-metadata@^3.4.0:
     version "3.5.0"
     resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-3.5.0.tgz#6d28343f65a6bbf8449886a0c0e4a71c77577055"
     integrity sha512-ZQf+DLZ5aKcRpLzYUyBS3yo3N0JSa82lNDO8rj3nMSlovLcz2riKFBsYgDzeXcv75oo5eqB2lx+B14UvPoCRnA==
     dependencies:
       gaxios "^2.1.0"
+      json-bigint "^0.3.0"
+  
+  gcp-metadata@^4.1.0:
+    version "4.1.0"
+    resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-4.1.0.tgz#8b9b5903882076948554af471c838e7ea2f564b4"
+    integrity sha512-r57SV28+olVsflPlKyVig3Muo/VDlcsObMtvDGOEtEJXj+DDE8bEl0coIkXh//hbkSDTvo+f5lbihZOndYXQQQ==
+    dependencies:
+      gaxios "^3.0.0"
       json-bigint "^0.3.0"
   
   get-stdin@^4.0.1:
@@ -1112,6 +1132,21 @@ Lockfile:
       jws "^4.0.0"
       lru-cache "^5.0.0"
   
+  google-auth-library@^6.0.0:
+    version "6.0.3"
+    resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-6.0.3.tgz#1f9f36b6e883cc4ad26bf5bf20d8d3fdca2ec5aa"
+    integrity sha512-2Np6ojPmaJGXHSMsBhtTQEKfSMdLc8hefoihv7N2cwEr8E5bq39fhoat6TcXHwa0XoGO5Guh9sp3nxHFPmibMw==
+    dependencies:
+      arrify "^2.0.0"
+      base64-js "^1.3.0"
+      ecdsa-sig-formatter "^1.0.11"
+      fast-text-encoding "^1.0.0"
+      gaxios "^3.0.0"
+      gcp-metadata "^4.1.0"
+      gtoken "^5.0.0"
+      jws "^4.0.0"
+      lru-cache "^5.0.0"
+  
   google-gax@^1.7.5:
     version "1.15.3"
     resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-1.15.3.tgz#e88cdcbbd19c7d88cc5fd7d7b932c4d1979a5aca"
@@ -1140,6 +1175,33 @@ Lockfile:
     dependencies:
       node-forge "^0.9.0"
   
+  google-p12-pem@^3.0.0:
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/google-p12-pem/-/google-p12-pem-3.0.1.tgz#a220c05a8d7ee9751dd133ee72ecfc855820d5ab"
+    integrity sha512-VlQgtozgNVVVcYTXS36eQz4PXPt9gIPqLOhHN0QiV6W6h4qSCNVKPtKC5INtJsaHHF2r7+nOIa26MJeJMTaZEQ==
+    dependencies:
+      node-forge "^0.9.0"
+  
+  googleapis-common@^4.3.0:
+    version "4.4.0"
+    resolved "https://registry.yarnpkg.com/googleapis-common/-/googleapis-common-4.4.0.tgz#b806e41c4e883f22b68769aafb3ed11802919091"
+    integrity sha512-Bgrs8/1OZQFFIfVuX38L9t48rPAkVUXttZy6NzhhXxFOEMSHgfFIjxou7RIXOkBHxmx2pVwct9WjKkbnqMYImQ==
+    dependencies:
+      extend "^3.0.2"
+      gaxios "^3.0.0"
+      google-auth-library "^6.0.0"
+      qs "^6.7.0"
+      url-template "^2.0.8"
+      uuid "^8.0.0"
+  
+  googleapis@^52.1.0:
+    version "52.1.0"
+    resolved "https://registry.yarnpkg.com/googleapis/-/googleapis-52.1.0.tgz#d9480469c3021d8ca0bc98bef5b785dde2eb3648"
+    integrity sha512-8eHVXidZv/C/xos/rEIlWZCwuR638yaqjlBMMk2y9iT8hOe7ebkgW0pENUv8KeSFowTQFKCfQ/nLdBRM8z2hUg==
+    dependencies:
+      google-auth-library "^6.0.0"
+      googleapis-common "^4.3.0"
+  
   graceful-fs@^4.1.2:
     version "4.2.4"
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
@@ -1157,6 +1219,16 @@ Lockfile:
     dependencies:
       gaxios "^2.1.0"
       google-p12-pem "^2.0.0"
+      jws "^4.0.0"
+      mime "^2.2.0"
+  
+  gtoken@^5.0.0:
+    version "5.0.1"
+    resolved "https://registry.yarnpkg.com/gtoken/-/gtoken-5.0.1.tgz#b93f309d89adfe230bb0f24269b978284ba89e0f"
+    integrity sha512-33w4FNDkUcyIOq/TqyC+drnKdI4PdXmWp9lZzssyEQKuvu9ZFN3KttaSnDKo52U3E51oujVGop93mKxmqO8HHg==
+    dependencies:
+      gaxios "^3.0.0"
+      google-p12-pem "^3.0.0"
       jws "^4.0.0"
       mime "^2.2.0"
   
@@ -1820,6 +1892,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
     integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
   
+  qs@^6.7.0:
+    version "6.9.4"
+    resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
+    integrity sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
+  
   range-parser@~1.2.1:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
@@ -2308,6 +2385,11 @@ Lockfile:
     dependencies:
       punycode "^2.1.0"
   
+  url-template@^2.0.8:
+    version "2.0.8"
+    resolved "https://registry.yarnpkg.com/url-template/-/url-template-2.0.8.tgz#fc565a3cccbff7730c775f5641f9555791439f21"
+    integrity sha1-/FZaPMy/93MMd19WQflVV5FDnyE=
+  
   util-deprecate@^1.0.1, util-deprecate@~1.0.1:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -2317,6 +2399,11 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
     integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+  
+  uuid@^8.0.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.2.0.tgz#cb10dd6b118e2dada7d0cd9730ba7417c93d920e"
+    integrity sha512-CYpGiFTUrmI6OBMkAdjSDM0k5h8SkkiTP4WAjQgDgNB1S3Ou9VBEvr6q0Kv2H1mMk7IWfxYGpMH5sd5AvcIV2Q==
   
   v8-compile-cache@^2.0.3:
     version "2.1.1"
