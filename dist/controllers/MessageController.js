@@ -44,19 +44,19 @@ var MessageReceiverController = /** @class */ (function () {
     function MessageReceiverController() {
     }
     MessageReceiverController.prototype.receiveMessage = function (req, res) {
+        var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var _a, senderMessage, senderName, dialogFlowResponse;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var _b, senderMessage, senderName, dialogFlowResponse;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a = req.body, senderMessage = _a.senderMessage, senderName = _a.senderName;
+                        _b = req.body, senderMessage = _b.senderMessage, senderName = _b.senderName;
                         return [4 /*yield*/, DialogFlowIntegrationService_1.default(senderMessage)];
                     case 1:
-                        dialogFlowResponse = _b.sent();
+                        dialogFlowResponse = _c.sent();
                         return [2 /*return*/, res.json({ data: [
                                     {
-                                        // message: `received ${senderMessage} from ${senderName}`
-                                        message: dialogFlowResponse.data.queryResult
+                                        message: (_a = dialogFlowResponse.data.queryResult) === null || _a === void 0 ? void 0 : _a.fulfillmentText
                                     }
                                 ]
                             })];
