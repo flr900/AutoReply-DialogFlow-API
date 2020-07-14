@@ -13,7 +13,7 @@ export default class MessageReceiverController {
       return res.json({ data:[
           {
             // message: `received ${senderMessage} from ${senderName}`
-            message: dialogFlowResponse
+            message: dialogFlowResponse.data.queryResult
           }
         ]
       })

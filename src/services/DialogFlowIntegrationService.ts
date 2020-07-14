@@ -1,5 +1,6 @@
 import {google} from 'googleapis'
 import { uuid } from 'uuidv4';
+import AppError from '../errors/AppError'
 
 const sessionId = uuid()
 const dialogFlow = google.dialogflow({version: 'v2'})
@@ -18,6 +19,9 @@ export default async function SendMessage(message: string){
   }
 }).then(dialogFlowresponse => dialogFlowresponse).catch((err) => console.log(err))
 
+if(!dialogFlowResponse) {
+  throw new AppError('Void message', 204)
+}
 return dialogFlowResponse
 
 }
