@@ -39,31 +39,64 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var DialogFlowIntegrationService_1 = __importDefault(require("../services/DialogFlowIntegrationService"));
-var MessageReceiverController = /** @class */ (function () {
-    function MessageReceiverController() {
+var googleapis_1 = require("googleapis");
+var AppError_1 = __importDefault(require("../errors/AppError"));
+var OAuth2AuthenticationService = /** @class */ (function () {
+    function OAuth2AuthenticationService() {
     }
-    MessageReceiverController.prototype.receiveMessage = function (req, res) {
+    OAuth2AuthenticationService.prototype.OAuth2AuthenticationService = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, senderMessage, senderName, dialogFlowResponse;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = req.body, senderMessage = _a.senderMessage, senderName = _a.senderName;
-                        return [4 /*yield*/, DialogFlowIntegrationService_1.default(senderMessage)];
-                    case 1:
-                        dialogFlowResponse = _b.sent();
-                        return [2 /*return*/, res.json({ data: [
-                                    {
-                                        // message: `received ${senderMessage} from ${senderName}`
-                                        message: dialogFlowResponse.data.queryResult
-                                    }
-                                ]
-                            })];
-                }
+            var OAuth2, OAuthClient, consentUrl;
+            return __generator(this, function (_a) {
+                OAuth2 = googleapis_1.google.auth.OAuth2;
+                OAuthClient = new OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URIS);
+                consentUrl = OAuthClient.generateAuthUrl({
+                    access_type: 'offline',
+                    scope: ['https://www.googleapis.com/auth/dialogflow']
+                });
+                console.log("Consent: " + consentUrl);
+                return [2 /*return*/, OAuthClient];
             });
         });
     };
-    return MessageReceiverController;
+    // Wait google callback
+    OAuth2AuthenticationService.prototype.OAuth2Callback = function (app) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        app.get('/oauth2callback', function (req, res) {
+                            var authCode = req.query.code;
+                            res.send('<h1>Thank you!</h1><p>Now close this tab.</p>');
+                            resolve(authCode);
+                        });
+                    })];
+            });
+        });
+    };
+    //GetAcessTokens
+    OAuth2AuthenticationService.prototype.GetAcessToken = function (OAuthClient, AuthCode) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        OAuthClient.getToken(AuthCode, function (error, tokens) {
+                            if (error) {
+                                return reject(error);
+                            }
+                            if (!tokens) {
+                                throw new AppError_1.default("Failed authentication", 400);
+                            }
+                            console.log("> Access tokens received!");
+                            OAuthClient.setCredentials(tokens);
+                            //set globalAuthentication
+                            googleapis_1.google.options({
+                                auth: OAuthClient
+                            });
+                            resolve();
+                        });
+                    })];
+            });
+        });
+    };
+    return OAuth2AuthenticationService;
 }());
-exports.default = MessageReceiverController;
+exports.default = OAuth2AuthenticationService;

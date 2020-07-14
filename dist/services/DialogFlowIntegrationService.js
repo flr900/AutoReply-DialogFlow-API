@@ -39,55 +39,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("dotenv/config");
-var express_1 = __importDefault(require("express"));
-var helmet_1 = __importDefault(require("helmet"));
-var cors_1 = __importDefault(require("cors"));
-var morgan_1 = __importDefault(require("morgan"));
-var AppError_1 = __importDefault(require("./errors/AppError"));
-var routes_1 = __importDefault(require("./routes/routes"));
-require("express-async-errors");
-var OAuth2AuthenticationService_1 = __importDefault(require("./services/OAuth2AuthenticationService"));
-var oauth2AuthenticationService = new OAuth2AuthenticationService_1.default();
-var app = express_1.default();
-app.use(morgan_1.default('dev'));
-app.use(helmet_1.default());
-app.use(cors_1.default());
-app.use(express_1.default.json());
-app.use(routes_1.default);
-app.use(function (err, request, response, _) {
-    if (err instanceof AppError_1.default) {
-        return response.status(err.statusCode).json({
-            status: 'error',
-            message: err.message,
-        });
-    }
-    console.error(err);
-    return response.status(500).json({
-        status: 'error',
-        message: 'Internal server error',
-    });
-});
-app.listen(process.env.PORT || 3333, function () {
-    console.log('Listening');
-});
-authenticate();
-function authenticate() {
+var googleapis_1 = require("googleapis");
+var uuidv4_1 = require("uuidv4");
+var AppError_1 = __importDefault(require("../errors/AppError"));
+var sessionId = uuidv4_1.uuid();
+var dialogFlow = googleapis_1.google.dialogflow({ version: 'v2' });
+function SendMessage(message) {
     return __awaiter(this, void 0, void 0, function () {
-        var OAuthClient, AuthCode;
+        var dialogFlowResponse;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, oauth2AuthenticationService.OAuth2AuthenticationService()];
+                case 0: return [4 /*yield*/, dialogFlow.projects.agent.sessions.detectIntent({
+                        session: "projects/" + process.env.PROJECT_ID + "/agent/sessions/" + sessionId,
+                        requestBody: {
+                            "queryInput": {
+                                "text": {
+                                    "text": message,
+                                    "languageCode": "pt-BR"
+                                }
+                            }
+                        }
+                    }).then(function (dialogFlowresponse) { return dialogFlowresponse; }).catch(function (err) { return console.log(err); })];
                 case 1:
-                    OAuthClient = _a.sent();
-                    return [4 /*yield*/, oauth2AuthenticationService.OAuth2Callback(app)];
-                case 2:
-                    AuthCode = _a.sent();
-                    return [4 /*yield*/, oauth2AuthenticationService.GetAcessToken(OAuthClient, AuthCode)];
-                case 3:
-                    _a.sent();
-                    return [2 /*return*/];
+                    dialogFlowResponse = _a.sent();
+                    if (!dialogFlowResponse) {
+                        throw new AppError_1.default('Not available answer', 400);
+                    }
+                    return [2 /*return*/, dialogFlowResponse];
             }
         });
     });
 }
+exports.default = SendMessage;
