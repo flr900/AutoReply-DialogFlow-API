@@ -1,4 +1,4 @@
-export interface IGoogleCredentials {
+export default interface IGoogleCredentials {
   web: {
     client_id: string,
     client_secret: string

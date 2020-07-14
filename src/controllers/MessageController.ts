@@ -1,4 +1,5 @@
 import {Request, Response} from 'express'
+import dialogFlowResponseService from '../services/DialogFlowIntegrationService'
 
 interface IRequest {
   senderMessage: string,
@@ -6,12 +7,13 @@ interface IRequest {
 }
 
 export default class MessageReceiverController {
-  public receiveMessage (req: Request, res: Response){
+  public async receiveMessage (req: Request, res: Response){
       const {senderMessage, senderName}: IRequest = req.body
-
+       const dialogFlowResponse = await dialogFlowResponseService(senderMessage)
       return res.json({ data:[
           {
-            message: `received ${senderMessage} from ${senderName}`
+            // message: `received ${senderMessage} from ${senderName}`
+            message: dialogFlowResponse
           }
         ]
       })

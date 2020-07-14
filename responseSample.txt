@@ -1,0 +1,102 @@
+{
+  "data": [
+    {
+      "message": {
+        "config": {
+          "url": "https://dialogflow.googleapis.com/v2/projects/pizzaria-encontro-qlyrco/agent/sessions/8499b3d5-fbe1-48d1-ad78-3b39d05f2656:detectIntent",
+          "method": "POST",
+          "userAgentDirectives": [
+            {
+              "product": "google-api-nodejs-client",
+              "version": "4.4.0",
+              "comment": "gzip"
+            }
+          ],
+          "data": {
+            "queryInput": {
+              "text": {
+                "text": "oi",
+                "languageCode": "pt-BR"
+              }
+            }
+          },
+          "headers": {
+            "x-goog-api-client": "gdcl/4.4.0 gl-node/10.19.0 auth/6.0.3",
+            "Accept-Encoding": "gzip",
+            "User-Agent": "google-api-nodejs-client/4.4.0 (gzip)",
+            "Authorization": "Bearer ya29.a0AfH6SMB6yxjMNWimSZ99y275YHRUXS2MpiqeCPX5J_KDbFXP6Roorv2r3ufhwMpKGxT410Qu6ul9zmCn9mI9srF2RdEpyu3qSSXOhMobpeYK3oY0kervJoycruKASnZODDo0P9wgJelUaPhxp-ZEB2JFlCvs6K0H14w",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          "params": {},
+          "retry": true,
+          "body": "{\"queryInput\":{\"text\":{\"text\":\"oi\",\"languageCode\":\"pt-BR\"}}}",
+          "responseType": "json"
+        },
+        "data": {
+          "responseId": "9b30f92b-3118-4d25-8b40-39b0ffd945f2-425db6e2",
+          "queryResult": {
+            "queryText": "oi",
+            "action": "input.welcome",
+            "parameters": {
+              "any": ""
+            },
+            "allRequiredParamsPresent": true,
+            "fulfillmentText": "Bem Vindo a pizzaria Encontro.",
+            "fulfillmentMessages": [
+              {
+                "text": {
+                  "text": [
+                    "Olá tudo bem? Obrigado pela preferencia!"
+                  ]
+                }
+              },
+              {
+                "text": {
+                  "text": [
+                    "Bem Vindo a pizzaria Encontro."
+                  ]
+                }
+              }
+            ],
+            "outputContexts": [
+              {
+                "name": "projects/pizzaria-encontro-qlyrco/agent/sessions/8499b3d5-fbe1-48d1-ad78-3b39d05f2656/contexts/bemvindo-followup",
+                "lifespanCount": 2,
+                "parameters": {
+                  "any.original": "",
+                  "any": ""
+                }
+              }
+            ],
+            "intent": {
+              "name": "projects/pizzaria-encontro-qlyrco/agent/intents/2e953886-ae41-49ba-9135-78b805e0f0e0",
+              "displayName": "Bem Vindo"
+            },
+            "intentDetectionConfidence": 1,
+            "languageCode": "pt-br"
+          }
+        },
+        "headers": {
+          "alt-svc": "h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+          "cache-control": "private",
+          "connection": "close",
+          "content-encoding": "gzip",
+          "content-type": "application/json; charset=UTF-8",
+          "date": "Tue, 14 Jul 2020 16:46:28 GMT",
+          "server": "ESF",
+          "transfer-encoding": "chunked",
+          "vary": "Origin, X-Origin, Referer",
+          "x-content-type-options": "nosniff",
+          "x-frame-options": "SAMEORIGIN",
+          "x-xss-protection": "0"
+        },
+        "status": 200,
+        "statusText": "OK",
+        "request": {
+          "responseURL": "https://dialogflow.googleapis.com/v2/projects/pizzaria-encontro-qlyrco/agent/sessions/8499b3d5-fbe1-48d1-ad78-3b39d05f2656:detectIntent"
+        }
+      }
+    }
+  ]
+}

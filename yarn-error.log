@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add @types/dialoflow -D
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add @types/hash -D
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fdialoflow: Not found
+  Error: https://registry.yarnpkg.com/@types%2fhash: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:198:13)
@@ -39,6 +39,7 @@ npm manifest:
     "author": "",
     "license": "ISC",
     "dependencies": {
+      "axios": "^0.19.2",
       "cors": "^2.8.5",
       "dialogflow": "^1.2.0",
       "dotenv": "^8.2.0",
@@ -47,11 +48,14 @@ npm manifest:
       "express": "^4.17.1",
       "express-async-errors": "^3.1.1",
       "googleapis": "^52.1.0",
+      "hash": "^0.2.1",
       "helmet": "^3.23.3",
       "morgan": "^1.10.0"
     },
     "devDependencies": {
+      "@types/axios": "^0.14.0",
       "@types/cors": "^2.8.6",
+      "@types/dialogflow": "^4.0.4",
       "@types/dotenv": "^8.2.0",
       "@types/express": "^4.17.7",
       "@types/helmet": "^0.0.47",
@@ -158,6 +162,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
     integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
   
+  "@types/axios@^0.14.0":
+    version "0.14.0"
+    resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
+    integrity sha1-7CMA++fX3d1+udOr+HmZlkyvzkY=
+    dependencies:
+      axios "*"
+  
   "@types/body-parser@*":
     version "1.19.0"
     resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.0.tgz#0685b3c47eb3006ffed117cdd55164b61f80538f"
@@ -184,6 +195,13 @@ Lockfile:
     integrity sha512-invOmosX0DqbpA+cE2yoHGUlF/blyf7nB0OGYBBiH27crcVm5NmFaZkLP4Ta1hGaesckCi5lVLlydNJCxkTOSg==
     dependencies:
       "@types/express" "*"
+  
+  "@types/dialogflow@^4.0.4":
+    version "4.0.4"
+    resolved "https://registry.yarnpkg.com/@types/dialogflow/-/dialogflow-4.0.4.tgz#39b784db0d800a5d58ee298aef8b2ac0d4213610"
+    integrity sha512-W0sSi/Zrn+HJ/Rijhteoh9bcI4dEBx5qAhcfRk614/ovV/E+/WmQTJlKHh/pbHcks17vDxdc0RrJ9IJ7MH6u5w==
+    dependencies:
+      dialogflow "*"
   
   "@types/dotenv@^8.2.0":
     version "8.2.0"
@@ -396,6 +414,13 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
     integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
+  
+  axios@*, axios@^0.19.2:
+    version "0.19.2"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+    integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+    dependencies:
+      follow-redirects "1.5.10"
   
   balanced-match@^1.0.0:
     version "1.0.0"
@@ -642,6 +667,13 @@ Lockfile:
     dependencies:
       ms "^2.1.1"
   
+  debug@=3.1.0:
+    version "3.1.0"
+    resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+    integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
+    dependencies:
+      ms "2.0.0"
+  
   decamelize@^1.1.2:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
@@ -667,7 +699,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
     integrity sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
   
-  dialogflow@^1.2.0:
+  dialogflow@*, dialogflow@^1.2.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/dialogflow/-/dialogflow-1.2.0.tgz#3485c351f95a76a1627515a07b2ed98f2760bfa7"
     integrity sha512-pBrPKNRP3WhSUNAeOKtN0GhVBj+CAcl7tqfBAhrhE8da0IrnAi3F1dk2xLFnH7Wd4/vEhcqq1mekYuyfC15FOw==
@@ -1013,6 +1045,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
     integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
   
+  follow-redirects@1.5.10:
+    version "1.5.10"
+    resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+    integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
+    dependencies:
+      debug "=3.1.0"
+  
   forwarded@~0.1.2:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
@@ -1241,6 +1280,11 @@ Lockfile:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-4.0.0.tgz#944771fd9c81c81265c4d6941860da06bb59479b"
     integrity sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==
+  
+  hash@^0.2.1:
+    version "0.2.1"
+    resolved "https://registry.yarnpkg.com/hash/-/hash-0.2.1.tgz#a719d789397c5637f02043c0c180f431fdf9a6ec"
+    integrity sha1-pxnXiTl8VjfwIEPAwYD0Mf35puw=
   
   helmet-crossdomain@0.4.0:
     version "0.4.0"
