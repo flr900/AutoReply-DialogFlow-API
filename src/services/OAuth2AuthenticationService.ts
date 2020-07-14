@@ -1,25 +1,20 @@
 import {google} from 'googleapis'
 import {OAuth2Client} from 'googleapis-common/node_modules/google-auth-library/build/src/auth/oauth2client'
-import path from 'path'
 import {Request, Response, Express} from 'express'
+import AppError from '../errors/AppError'
 
-import IGoogleCredentials from '../DTOs/IGoogleCredentials'
 
 export default class OAuth2AuthenticationService  {
 
   public async OAuth2AuthenticationService () {
-  const OAuth2 = google.auth.OAuth2
+    const OAuth2 = google.auth.OAuth2
 
-// Create OauthClient
-
-const credentialsPath = path.resolve(__dirname, "..", "..", "credentials")
-
-const OauthCredentials: IGoogleCredentials = require(`${credentialsPath}/OAuthCredentials.json`)
+    // Create OauthClient
 
 const OAuthClient = new OAuth2(
-  OauthCredentials.web.client_id,
-  OauthCredentials.web.client_secret,
-  OauthCredentials.web.redirect_uris[0]
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URIS
 )
 
 //Request User Consent
@@ -53,6 +48,10 @@ public async GetAcessToken (OAuthClient: OAuth2Client, AuthCode: any){
     OAuthClient.getToken(AuthCode, (error, tokens) => {
       if (error) {
         return reject(error)
+      }
+
+      if(!tokens){
+        throw new AppError("Failed authentication", 400)
       }
 
       console.log(`> Access tokens received!` )

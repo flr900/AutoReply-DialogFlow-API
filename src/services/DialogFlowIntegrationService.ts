@@ -20,7 +20,7 @@ export default async function SendMessage(message: string){
 }).then(dialogFlowresponse => dialogFlowresponse).catch((err) => console.log(err))
 
 if(!dialogFlowResponse) {
-  throw new AppError('Void message', 204)
+  throw new AppError('Not available answer', 400)
 }
 return dialogFlowResponse
 
