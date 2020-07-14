@@ -8,7 +8,8 @@ import AppError from './errors/AppError'
 import routes from './routes/routes'
 
 import 'express-async-errors';
-
+import OAuth2AuthenticationService from './services/OAuth2AuthenticationService'
+const oauth2AuthenticationService = new OAuth2AuthenticationService()
 const app = express()
 
 app.use(morgan('dev'))
@@ -36,4 +37,12 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 app.listen(process.env.PORT || 3333, () => {
   console.log('Listening')
 })
+
+
+authenticate()
+async function authenticate(){
+const OAuthClient =  await oauth2AuthenticationService.OAuth2AuthenticationService()
+const AuthCode = await oauth2AuthenticationService.OAuth2Callback(app)
+await oauth2AuthenticationService.GetAcessToken(OAuthClient, AuthCode)
+}
 
