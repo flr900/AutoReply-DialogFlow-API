@@ -3,12 +3,20 @@ import {OAuth2Client} from 'googleapis-common/node_modules/google-auth-library/b
 import {Request, Response, Express} from 'express'
 import AppError from '../errors/AppError'
 
+import { getRepository, Repository } from 'typeorm'
+import TokensModel from '../models/GoogleAuth'
+
 
 export default class OAuth2AuthenticationService  {
+  constructor(
+    private authRepository: Repository<TokensModel>
+  ) {
+    this.authRepository = getRepository(TokensModel)
+  }
+
 
   public async OAuth2AuthenticationService () {
     const OAuth2 = google.auth.OAuth2
-
     // Create OauthClient
 
 const OAuthClient = new OAuth2(

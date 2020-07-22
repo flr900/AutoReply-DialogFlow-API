@@ -12,7 +12,7 @@ export default class MessageReceiverController {
        const dialogFlowResponse = await dialogFlowResponseService(senderMessage)
       return res.json({ data:[
           {
-            message: dialogFlowResponse.data.queryResult?.fulfillmentText
+            message: dialogFlowResponse
           }
         ]
       })

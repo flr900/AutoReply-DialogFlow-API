@@ -22,6 +22,12 @@ export default async function SendMessage(message: string){
 if(!dialogFlowResponse) {
   throw new AppError('Not available answer', 400)
 }
-return dialogFlowResponse
+
+if(dialogFlowResponse.data.queryResult?.intentDetectionConfidence){
+  if (dialogFlowResponse.data.queryResult?.intentDetectionConfidence < 0.4) {
+   return "Não entendi, poderia repetir por favor?"
+  }
+}
+return dialogFlowResponse.data.queryResult
 
 }
