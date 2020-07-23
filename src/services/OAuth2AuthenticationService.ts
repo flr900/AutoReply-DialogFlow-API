@@ -4,15 +4,12 @@ import {Request, Response, Express} from 'express'
 import AppError from '../errors/AppError'
 
 import { getRepository, Repository } from 'typeorm'
-import TokensModel from '../models/GoogleAuth'
+import TokensModel from '../models/AuthModel'
 
+const authRepository = getRepository(TokensModel)
 
 export default class OAuth2AuthenticationService  {
-  constructor(
-    private authRepository: Repository<TokensModel>
-  ) {
-    this.authRepository = getRepository(TokensModel)
-  }
+
 
 
   public async OAuth2AuthenticationService () {
@@ -66,6 +63,9 @@ public async GetAcessToken (OAuthClient: OAuth2Client, AuthCode: any){
 
       OAuthClient.setCredentials(tokens)
       //set globalAuthentication
+
+
+
       google.options({
         auth: OAuthClient
       })

@@ -5,12 +5,10 @@ import {
 } from 'typeorm';
 
 @Entity('tokens')
-class Tokens {
+export default class Tokens {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   acess_token: string;
 }
-
-export default Tokens;
